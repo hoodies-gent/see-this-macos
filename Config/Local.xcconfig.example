@@ -1,0 +1,4 @@
+// Copy to Local.xcconfig (ignored by Git) to sign Debug builds with a stable local identity.
+// Create a self-signed Code Signing certificate with this name in Keychain Access first.
+CODE_SIGN_STYLE = Manual
+CODE_SIGN_IDENTITY = SeeThis Local Development

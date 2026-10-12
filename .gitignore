@@ -1,0 +1,29 @@
+# Per-user Xcode workspace and UI state.
+**/xcuserdata/
+
+# macOS Finder metadata.
+.DS_Store
+
+# Xcode Derived Data, if configured inside the repository.
+DerivedData/
+
+# Local agent planning and execution artifacts.
+.agents/
+.claude/
+.codex/
+.superpowers/
+
+# Isolated local Git worktrees.
+.worktrees/
+
+# Local signing override; copy from Config/Local.xcconfig.example.
+Config/Local.xcconfig
+
+# Local secrets and environment overrides.
+.env
+.env.*
+!.env.example
+
+# Local Xcode build and result artifacts.
+build/
+*.xcresult

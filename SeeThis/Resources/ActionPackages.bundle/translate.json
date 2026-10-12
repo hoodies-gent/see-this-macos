@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "translate",
+  "version": "1.0.0",
+  "minRuntimeVersion": "1.0.0",
+  "display": {
+    "name": "Translate with DeepL",
+    "allowsFollowUp": false
+  },
+  "input": {
+    "selection": "required"
+  },
+  "execution": {
+    "strategy": "singleCapability",
+    "capability": "translate.deepl"
+  },
+  "permissions": [
+    {
+      "kind": "network",
+      "host": "api-free.deepl.com",
+      "egress": [
+        "selection",
+        "sourceLanguage",
+        "targetLanguage"
+      ]
+    }
+  ],
+  "budget": {
+    "maxModelCalls": 0,
+    "maxCapabilityCalls": 1
+  },
+  "output": {
+    "kind": "text",
+    "format": "markdown"
+  }
+}

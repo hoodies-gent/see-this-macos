@@ -1,0 +1,85 @@
+name: Release
+
+# Runs only when a version tag is pushed, never for ordinary branch pushes.
+# It builds the DMG and attaches it to a draft release for review.
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Build DMG and draft release
+    runs-on: macos-26
+    timeout-minutes: 30
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Package universal DMG
+        run: ./scripts/package-dmg.sh
+
+      - name: Check tag matches app version and checksum
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          dmgs=(build/SeeThis-*.dmg)
+          if [[ ${#dmgs[@]} -ne 1 ]]; then
+            echo "Expected exactly one DMG in build/, found ${#dmgs[@]}." >&2
+            exit 1
+          fi
+          version=${dmgs[0]#build/SeeThis-}
+          version=${version%.dmg}
+          tag_version=${TAG#v}
+          tag_version=${tag_version%%-*}
+          if [[ "$tag_version" != "$version" ]]; then
+            echo "Tag $TAG does not match app version $version." >&2
+            exit 1
+          fi
+          shasum -a 256 -c "${dmgs[0]}.sha256"
+          # The packaging script records a repo-relative path. Rewrite it so the
+          # checksum file verifies when downloaded next to the DMG.
+          (cd build && shasum -a 256 "$(basename "${dmgs[0]}")" > "$(basename "${dmgs[0]}").sha256")
+          cat "${dmgs[0]}.sha256"
+
+      - name: Create draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          cat > release-notes.md <<NOTES
+          Unsigned preview build. macOS asks for approval the first time you open it. Follow the [installation guide](https://github.com/${REPO}/blob/${TAG}/INSTALL.md).
+
+          Requires macOS 15 or later and [Ollama](https://ollama.com/download) with at least one chat model. Universal for Apple silicon and Intel; Intel is untested.
+
+          Verify the download with \`shasum -a 256 -c SeeThis-*.dmg.sha256\` in the folder containing both files.
+          NOTES
+          flags=(--draft)
+          if [[ "$TAG" == *-* ]]; then
+            flags+=(--prerelease)
+          fi
+          gh release create "$TAG" build/SeeThis-*.dmg build/SeeThis-*.dmg.sha256 \
+            --repo "$REPO" \
+            --verify-tag \
+            --title "SeeThis ${TAG#v}" \
+            --notes-file release-notes.md \
+            "${flags[@]}"

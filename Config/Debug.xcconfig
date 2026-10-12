@@ -1,0 +1,7 @@
+// Default signing for local builds: ad-hoc, no Apple developer account or local certificate required.
+// For stable Accessibility trust across rebuilds, copy Local.xcconfig.example to Local.xcconfig.
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = -
+DEVELOPMENT_TEAM =
+
+#include? "Local.xcconfig"
