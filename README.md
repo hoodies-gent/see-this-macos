@@ -35,7 +35,7 @@ Prefer to build it yourself? See [Run from source](#run-from-source).
 
 - Explains or translates selected text in a compact overlay, so you can keep reading.
 - Runs explanations on local Ollama models and lets you save reusable prompts as Lenses.
-- Accepts an optional PDF, TXT, or Markdown file when the selection needs more context.
+- Accepts an optional PDF, TXT, or Markdown file when the selection needs more context ([example](Artwork/Demo/seethis-context-file.gif)).
 - Supports optional DeepL translation with your own API key.
 
 ## Use
