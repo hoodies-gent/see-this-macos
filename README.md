@@ -33,10 +33,11 @@ Prefer to build it yourself? See [Run from source](#run-from-source).
 
 ## Features
 
-- Explains or translates selected text in a compact overlay, so you can keep reading.
-- Runs explanations on local Ollama models and lets you save reusable prompts as Lenses.
-- Accepts an optional PDF, TXT, or Markdown file when the selection needs more context ([example](Artwork/Demo/seethis-context-file.gif)).
-- Supports optional DeepL translation with your own API key.
+- **Quick answers.** Explain or translate selected text in a compact overlay, so you can keep reading.
+- **Free-form questions.** Type your own question about the selection, then ask a follow-up if you need to.
+- **Your own Lenses.** Save prompts you ask often as Lenses, so each is one click away.
+- **Context files.** Drop a PDF, TXT, or Markdown file onto the overlay for more context ([example](Artwork/Demo/seethis-context-file.gif)).
+- **Optional cloud translation.** Add your own DeepL API key to translate with DeepL.
 
 ## Use
 
