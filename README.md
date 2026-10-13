@@ -31,6 +31,25 @@ Requirements:
 
 Prefer to build it yourself? See [Run from source](#run-from-source).
 
+<details>
+<summary>Verify the download (optional)</summary>
+
+Releases are built by GitHub Actions from the tagged source. Run these in the folder with the downloaded files.
+
+Compare the checksum:
+
+```sh
+shasum -a 256 -c SeeThis-*.dmg.sha256
+```
+
+Check the build attestation, which ties the DMG to this repository and the workflow run that built it. This needs the [GitHub CLI](https://cli.github.com). Releases from 0.1.1 on include one; 0.1.0 has only the checksum.
+
+```sh
+gh attestation verify SeeThis-*.dmg --repo hoodies-gent/see-this-macos
+```
+
+</details>
+
 ## Features
 
 - **Quick answers.** Explain or translate selected text in a compact overlay, so you can keep reading.

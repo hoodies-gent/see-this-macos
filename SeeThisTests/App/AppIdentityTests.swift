@@ -7,7 +7,7 @@ struct AppIdentityTests {
         #expect(AppIdentity.bundleIdentifier == "io.github.hoodies-gent.seethis")
         #expect(AppIdentity.keychainService == "io.github.hoodies-gent.seethis")
         #expect(AppIdentity.tagline == "Select it. Ask AI. Keep reading.")
-        #expect(AppIdentity.releaseVersion == "0.1.0")
+        #expect(AppIdentity.releaseVersion == "0.1.1")
     }
 
     @Test func deeplCredentialUsesTheSeeThisKeychainService() {
