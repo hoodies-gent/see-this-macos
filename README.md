@@ -5,7 +5,7 @@
 </h3>
 
 <p align="center">
-  <a href="https://github.com/hoodies-gent/see-this-macos/releases"><img src="https://img.shields.io/github/v/release/hoodies-gent/see-this-macos?include_prereleases&label=release" alt="Latest release"></a>
+  <a href="https://github.com/hoodies-gent/see-this-macos/releases"><img src="https://img.shields.io/github/v/release/hoodies-gent/see-this-macos?label=release" alt="Latest release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/hoodies-gent/see-this-macos" alt="License"></a>
   <img src="https://img.shields.io/badge/macOS-15%2B-blue" alt="macOS 15 or later">
   <a href="https://github.com/hoodies-gent/see-this-macos/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/hoodies-gent/see-this-macos/ci.yml?label=CI" alt="CI status"></a><br>
