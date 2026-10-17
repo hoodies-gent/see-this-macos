@@ -78,7 +78,10 @@ jobs:
 
           Requires macOS 15 or later and [Ollama](https://ollama.com/download) with at least one chat model. Universal for Apple silicon and Intel; Intel is untested.
 
-          Verify the download with \`shasum -a 256 -c SeeThis-*.dmg.sha256\` in the folder containing both files.
+          Verify the download (optional), in the folder with both files:
+
+          - \`shasum -a 256 -c SeeThis-*.dmg.sha256\`
+          - \`gh attestation verify SeeThis-*.dmg --repo ${REPO}\`
           NOTES
           flags=(--draft)
           if [[ "$TAG" == *-* ]]; then
